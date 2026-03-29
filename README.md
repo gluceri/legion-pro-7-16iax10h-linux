@@ -12,7 +12,7 @@
 [![Build](https://github.com/ChaoticSi1ence/legion-pro-7-16iax10h-linux/actions/workflows/build.yml/badge.svg?branch=main)](https://github.com/ChaoticSi1ence/legion-pro-7-16iax10h-linux/actions/workflows/build.yml)
 
 > Fork of [johnfanv2/LenovoLegionLinux](https://github.com/johnfanv2/LenovoLegionLinux),
-> built for the **Legion Pro 7 16IAX10H** (Q7CN, EC 0x5508) and **Legion Pro 7 16AFR10H** (SMCN, EC 0x5508).. Clone-and-build only.
+> built for the **Legion Pro 7 16IAX10H** (Q7CN, EC 0x5508) and **Legion Pro 7 16AFR10H** (SMCN, EC 0x5508). Clone-and-build only.
 
 **Not affiliated with Lenovo. Use at your own risk.**
 
