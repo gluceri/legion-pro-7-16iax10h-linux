@@ -1126,7 +1126,7 @@ static const struct model_config model_smcn = {
 	.no_ioport_light = true,
 	.fancurve_wmi_64byte = true,
 	.acpi_check_dev = false,
-	.ramio_physical_start = 0xFE00D400, // or 0xFE0B0400 ?? REALLY CONFUSED ABOUT THIS! I DON'T KNOW ITS CORRECT VALUE!
+	.ramio_physical_start = 0xFEEC2400,
 	.ramio_size = 0x600
 };
 
