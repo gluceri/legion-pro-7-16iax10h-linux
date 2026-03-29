@@ -1095,8 +1095,10 @@ static const struct model_config model_q7cn = {
  * Embedded Controller Firmware Revision: 1.17 (legion_laptop reports 2b0 (version = 0x02, debug = 0xb0))
  * EC ID: ITE IT5508 (0x5508), reported by gluceri (upstream issue #385)
  * AMD variant of the Gen 10 Legion Pro 7 (same chassis as Q7CN/83F5).
- * Identical to model_q7cn except ramio_physical_start (unverified on AMD;
- * value from gluceri's GKCN/force=1 testing, may need correction).
+ * Identical to model_q7cn except ramio_physical_start.
+ * Derived from DSDT: ERAX OperationRegion at 0xFEEC2400 maps to EC 0xC400
+ * (confirmed by SPMO field at ERAX+0x20 = EXT_POWERMODE at EC 0xC420).
+ * Follows the established pattern: ramio = ERAX address (as with older models).
  * EC direct reads give wrong values; WMI3 access methods required.
  */
 static const struct model_config model_smcn = {
