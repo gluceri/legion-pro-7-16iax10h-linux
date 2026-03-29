@@ -1088,7 +1088,11 @@ static const struct model_config model_q7cn = {
 };
 
 /*
- * Legion Pro 7 16AFR10H (2025) - Model 83RU - Ryzen 9 9955HX, RTX 5070 Ti, 3 fans
+ * Legion Pro 7 16AFR10H (2025)
+ * Model 83RU - Ryzen 9 9955HX, RTX 5070 Ti, 3 fans
+ * BIOS SMCN19WW released 11/25/2025
+ * Platform Firmware Revision: 1.19
+ * Embedded Controller Firmware Revision: 1.17 (legion_laptop reports 2b0 (version = 0x02, debug = 0xb0))
  * EC ID: ITE IT5508 (0x5508), reported by gluceri (upstream issue #385)
  * AMD variant of the Gen 10 Legion Pro 7 (same chassis as Q7CN/83F5).
  * Identical to model_q7cn except ramio_physical_start (unverified on AMD;
@@ -1105,20 +1109,24 @@ static const struct model_config model_smcn = {
 	.has_minifancurve = false,
 	.has_custom_powermode = true,
 	.custom_powermode_unsafe = true,
+	// ACCESS_METHOD_EC: "quiet", "balanced" and "performance" are available in /sys/firmware/acpi/platform_profile_choices
+	//                    they are correctly mapped to colors blue, white, red
+	// ACCESS_METHOD_WMI: "quiet", "balanced" and "performance" are available in /sys/firmware/acpi/platform_profile_choices
+	//                    they are correctly mapped to colors blue, white, red
 	.access_method_powermode = ACCESS_METHOD_WMI,
 	/* WMI controls 3-level white backlight; RGB per-zone via USB HID (048d:c197) */
 	.access_method_keyboard = ACCESS_METHOD_WMI,
-	.access_method_fanspeed = ACCESS_METHOD_WMI3,
-	.access_method_temperature = ACCESS_METHOD_WMI3,
+	.access_method_fanspeed = ACCESS_METHOD_WMI3, // ACCESS_METHOD_WMI3 ok; ACCESS_METHOD_ACPI seems to work; EC doesn't work
+	.access_method_temperature = ACCESS_METHOD_WMI3, // ACCESS_METHOD_WMI3 ok; ACCESS_METHOD_ACPI seems to work; EC doesn't work
 	.access_method_fancurve = ACCESS_METHOD_WMI3,
 	/* Gamezone WMI (FAN_GET/SET_FULLSPEED) can crash EC 0x5508; use OtherMethod */
-	.access_method_fanfullspeed = ACCESS_METHOD_WMI3,
+	.access_method_fanfullspeed = ACCESS_METHOD_WMI3, // ACCESS_METHOD_WMI and ACCESS_METHOD_EC seems to work too
 	.fan_fullspeed_unsupported = true,
 	.no_ylogo_light = true,
 	.no_ioport_light = true,
 	.fancurve_wmi_64byte = true,
 	.acpi_check_dev = false,
-	.ramio_physical_start = 0xFE00D400,
+	.ramio_physical_start = 0xFE00D400, // or 0xFE0B0400 ?? REALLY CONFUSED ABOUT THIS! I DON'T KNOW ITS CORRECT VALUE!
 	.ramio_size = 0x600
 };
 
@@ -4177,6 +4185,21 @@ static int debugfs_fancurve_show(struct seq_file *s, void *unused)
 	err = wmi_read_fanspeed_other(1, &fanspeed);
 	seq_file_print_with_error(s, "2 fanspeed WMI3", err, fanspeed);
 
+	if (priv->conf->num_fans > 2) {
+		err = read_fanspeed(priv, 2, &fanspeed);
+		seq_file_print_with_error(s, "3 fanspeed", err, fanspeed);
+		err = ec_read_fanspeed(&priv->ecram, priv->conf, 2, &fanspeed);
+		seq_file_print_with_error(s, "3 fanspeed EC", err, fanspeed);
+		err = acpi_read_fanspeed(priv, 2, &fanspeed);
+		seq_file_print_with_error(s, "3 fanspeed ACPI", err, fanspeed);
+		err = wmi_read_fanspeed_gz(2, &fanspeed);
+		seq_file_print_with_error(s, "3 fanspeed WMI", err, fanspeed);
+		err = wmi_read_fanspeed(2, &fanspeed);
+		seq_file_print_with_error(s, "3 fanspeed WMI2", err, fanspeed);
+		err = wmi_read_fanspeed_other(2, &fanspeed);
+		seq_file_print_with_error(s, "3 fanspeed WMI3", err, fanspeed);
+	}
+
 	seq_printf(s, "powermode access method: %d\n",
 		   priv->conf->access_method_powermode);
 	err = read_powermode(priv, &powermode);
@@ -5329,14 +5352,14 @@ static const struct legion_wmi_private legion_wmi_context_f = {
 #define LEGION_WMI_GUID_FAN_EVENT "D320289E-8FEA-41E0-86F9-611D83151B5F"
 /*
  * Fan2Event ("Fancooling finish event") - not present in ACPI on all models
- * (e.g. absent on Q7CN/EC 0x5508). The WMI bus silently skips unmatched IDs.
+ * (e.g. absent on Q7CN/SMCN with EC 0x5508). The WMI bus silently skips unmatched IDs.
  */
 #define LEGION_WMI_GUID_FAN2_EVENT "BC72A435-E8C1-4275-B3E2-D8B8074ABA59"
 #define LEGION_WMI_GUID_GAMEZONE_KEY_EVENT \
 	"10AFC6D9-EA8B-4590-A2E7-1CD3C84BB4B1"
 /*
  * GPU, OC, and TEMP event GUIDs - not present in ACPI on all models
- * (e.g. absent on Q7CN/EC 0x5508). The WMI bus silently skips unmatched IDs.
+ * (e.g. absent on Q7CN/SMCN with EC 0x5508). The WMI bus silently skips unmatched IDs.
  */
 #define LEGION_WMI_GUID_GAMEZONE_GPU_EVENT \
 	"BFD42481-AEE3-4502-A107-AFB68425C5F8"

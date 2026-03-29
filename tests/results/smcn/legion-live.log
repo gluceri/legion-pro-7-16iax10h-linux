@@ -1,0 +1,123 @@
+
+== 1. Module Status ==
+  [PASS] legion_laptop module loaded
+  [PASS] Sysfs path exists
+  [PASS] hwmon found: /sys/class/hwmon/hwmon14
+  Module: /lib/modules/6.19.10-arch1-1-lll-boost/kernel/drivers/platform/x86/legion-laptop.ko
+  BIOS: SMCN19WW
+  Product: 83RU
+  Kernel: 6.19.10-arch1-1-lll-boost
+
+== 2. Fan Speeds (RPM) ==
+  [PASS] fan1_input: 1700 RPM
+  [PASS] fan2_input: 1700 RPM
+  [PASS] fan3_input: 1500 RPM
+
+== 3. Temperatures ==
+  [PASS] temp1_input: 57C (raw: 57000)
+  [PASS] temp2_input: 46C (raw: 46000)
+
+== 4. Fan Curve Points ==
+    point1: 2
+    point2: 5
+    point3: 7
+    point4: 10
+    point5: 12
+    point6: 15
+    point7: 17
+    point8: 20
+    point9: 22
+    point10: 25
+  [PASS] All 10 fan curve speed points readable
+  [INFO] Debugfs fan curve:
+    EC Chip ID: 5508
+    EC Chip Version: 2b0
+    legion_laptop features: fancurve powermode platformprofile platformprofilenotify minifancurve fancurve_pmw_speed fancurve_rpm_speed
+    legion_laptop ec_readonly: 0
+    ACPI CFG error: 0
+    ACPI CFG: 2081289482
+    temperature access method: 5
+    CPU temperature error: 0
+    CPU temperature: 57
+    CPU temperature EC error: 0
+    CPU temperature EC: 146
+    CPU temperature ACPI error: 0
+    CPU temperature ACPI: 57
+    CPU temperature WMI error: 0
+    CPU temperature WMI: 0
+
+== 5. Fan Control Attributes ==
+  [INFO] fan_fullspeed: not present
+  [INFO] fan_maxspeed: not present
+  [INFO] conservation_mode: not present
+  [INFO] fn_lock: not present
+
+== 6. LED Drivers ==
+  [WARN] platform::ioport: not registered
+  [WARN] platform::ylogo: not registered
+  [PASS] kbd_backlight: brightness=0 max=2
+
+== 7. Platform Profile ==
+  [INFO] platform_profile not available
+
+== 8. Custom Mode (255) Block Test ==
+  Current powermode: 2
+  [PASS] Custom mode (255) write correctly blocked
+  [PASS] dmesg warning present: custom power mode (255) blocked on this model — known to cause shutdown. Load with allow_custom_mode=1 to override.
+  [PASS] Power mode unchanged after blocked write (2)
+
+== 9. Power Mode Cycling (Quiet -> Balanced -> Performance) ==
+  Starting powermode: 2
+
+  [INFO] --- Switching to Quiet (powermode=1) ---
+  [PASS] Quiet: write OK, readback=1
+    Fans (RPM): fan1=1800 fan2=1800 fan3=1600
+    Temps (C): cpu=57 gpu=46
+  [PASS] Quiet: stable (fan1 readings: 1800, 1800, 1800)
+
+  [INFO] --- Switching to Balanced (powermode=2) ---
+  [PASS] Balanced: write OK, readback=2
+    Fans (RPM): fan1=1800 fan2=1800 fan3=1900
+    Temps (C): cpu=57 gpu=46
+  [PASS] Balanced: stable (fan1 readings: 1800, 1800, 1800)
+
+  [INFO] --- Switching to Performance (powermode=3) ---
+  [PASS] Performance: write OK, readback=3
+    Fans (RPM): fan1=1800 fan2=1800 fan3=2200
+    Temps (C): cpu=57 gpu=46
+  [PASS] Performance: stable (fan1 readings: 1800, 1800, 1800)
+
+== 10. Restore Original Power Mode ==
+  [PASS] Restored to original powermode 2
+
+== 11. Extreme Mode (224) Read Test ==
+  [INFO] NOT writing extreme mode — read-only check
+  [INFO] Not in extreme mode (current: 2)
+
+== 12. dmesg Error Check ==
+  [WARN] 30 error/fail messages in dmesg:
+    [ 5558.412988] legion PNP0C09:00: Creating debugfs interface
+    [ 5574.258517] legion PNP0C09:00: Creating debugfs interface
+    [ 5586.597555] legion PNP0C09:00: Creating debugfs interface
+    [ 5651.788402] legion PNP0C09:00: Creating debugfs interface
+    [ 5910.210483] legion PNP0C09:00: Creating debugfs interface
+    [ 5934.853390] legion PNP0C09:00: Creating debugfs interface
+    [ 6558.483507] legion PNP0C09:00: Creating debugfs interface
+    [ 6600.455885] legion PNP0C09:00: Creating debugfs interface
+    [ 6713.710255] legion PNP0C09:00: Creating debugfs interface
+    [ 6838.394514] legion PNP0C09:00: Creating debugfs interface
+
+== 13. EC RAM / Debugfs ==
+  [PASS] Debugfs directory exists
+    ecmemory
+    ecmemoryram
+    fancurve
+
+== SUMMARY ==
+
+  PASS: 21  |  FAIL: 0  |  WARN: 3  |  Total: 24
+
+  All tests passed.
+  3 warning(s) — review for potential issues.
+
+Log saved to: /tmp/legion-live-test-09oMa6.log

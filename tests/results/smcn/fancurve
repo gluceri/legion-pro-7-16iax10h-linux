@@ -1,0 +1,123 @@
+EC Chip ID: 5508
+EC Chip Version: 2b0
+legion_laptop features: fancurve powermode platformprofile platformprofilenotify minifancurve fancurve_pmw_speed fancurve_rpm_speed
+legion_laptop ec_readonly: 0
+ACPI CFG error: 0
+ACPI CFG: 2081289482
+temperature access method: 5
+CPU temperature error: 0
+CPU temperature: 58
+CPU temperature EC error: 0
+CPU temperature EC: 146
+CPU temperature ACPI error: 0
+CPU temperature ACPI: 58
+CPU temperature WMI error: 0
+CPU temperature WMI: 0
+CPU temperature WMI2 error: 0
+CPU temperature WMI2: 0
+CPU temperature WMI3 error: 0
+CPU temperature WMI3: 58
+GPU temperature error: 0
+GPU temperature: 48
+GPU temperature EC error: 0
+GPU temperature EC: 0
+GPU temperature ACPI error: 0
+GPU temperature ACPI: 48
+GPU temperature WMI error: 0
+GPU temperature WMI: 0
+GPU temperature WMI2 error: 0
+GPU temperature WMI2: 0
+GPU temperature WMI3 error: 0
+GPU temperature WMI3: 48
+fan speed access method: 5
+1 fanspeed error: 0
+1 fanspeed: 1700
+1 fanspeed EC error: 0
+1 fanspeed EC: 23135
+1 fanspeed ACPI error: 0
+1 fanspeed ACPI: 1700
+1 fanspeed WMI error: 0
+1 fanspeed WMI: 0
+1 fanspeed WMI2 error: 0
+1 fanspeed WMI2: 0
+1 fanspeed WMI3 error: 0
+1 fanspeed WMI3: 1700
+2 fanspeed error: 0
+2 fanspeed: 1800
+2 fanspeed EC error: 0
+2 fanspeed EC: 18020
+2 fanspeed ACPI error: 0
+2 fanspeed ACPI: 1800
+2 fanspeed WMI error: 0
+2 fanspeed WMI: 0
+2 fanspeed WMI2 error: 0
+2 fanspeed WMI2: 0
+2 fanspeed WMI3 error: 0
+2 fanspeed WMI3: 1800
+3 fanspeed error: 0
+3 fanspeed: 1400
+3 fanspeed EC error: -22
+3 fanspeed EC: 1400
+3 fanspeed ACPI error: -22
+3 fanspeed ACPI: 1400
+3 fanspeed WMI error: -22
+3 fanspeed WMI: 1400
+3 fanspeed WMI2 error: 0
+3 fanspeed WMI2: 0
+3 fanspeed WMI3 error: 0
+3 fanspeed WMI3: 1400
+powermode access method: 3
+powermode error: 0
+powermode: 2
+powermode EC error: 0
+powermode EC: 64
+powermode ACPI error: -5
+powermode ACPI: 0
+powermode WMI error: 0
+powermode WMI: 2
+has custom powermode: 1
+ACPI rapidcharge error: 0
+ACPI rapidcharge: 1
+WMI backlight 2 state: 0
+WMI backlight 3 state: 0
+WMI light IO port: 0
+WMI light Y logo/lid: 1
+EC minifancurve feature enabled: 0
+EC minifancurve on cool: error
+EC lockfancontroller error: 0
+EC lockfancontroller: false
+fanfullspeed error: 0
+fanfullspeed: 0
+fanfullspeed EC error: 0
+fanfullspeed EC: 0
+Max speed for fancurve: 10000
+Current fan curve in hardware:
+Fan curve current point id: 0
+Fan curve points size: 10
+u(speed_of_unit)|speed1[u]|speed2[u]|speed1[pwm]|speed2[pwm]|acceleration|deceleration|cpu_min_temp|cpu_max_temp|gpu_min_temp|gpu_max_temp|ic_min_temp|ic_max_temp
+1	 1	 0	 2	 0	 0	 0	 0	 0	 0	 0	 0	 0
+1	 2	 0	 5	 0	 0	 0	 0	 0	 0	 0	 0	 0
+1	 3	 0	 7	 0	 0	 0	 0	 0	 0	 0	 0	 0
+1	 4	 0	 10	 0	 0	 0	 0	 0	 0	 0	 0	 0
+1	 5	 0	 12	 0	 0	 0	 0	 0	 0	 0	 0	 0
+1	 6	 0	 15	 0	 0	 0	 0	 0	 0	 0	 0	 0
+1	 7	 0	 17	 0	 0	 0	 0	 0	 0	 0	 0	 0
+1	 8	 0	 20	 0	 0	 0	 0	 0	 0	 0	 0	 0
+1	 9	 0	 22	 0	 0	 0	 0	 0	 0	 0	 0	 0
+1	 10	 0	 25	 0	 0	 0	 0	 0	 0	 0	 0	 0
+=====================
+Current fan curve in hardware (WMI; might be empty)
+Fan curve current point id: 0
+Fan curve points size: 10
+u(speed_of_unit)|speed1[u]|speed2[u]|speed1[pwm]|speed2[pwm]|acceleration|deceleration|cpu_min_temp|cpu_max_temp|gpu_min_temp|gpu_max_temp|ic_min_temp|ic_max_temp
+1	 1	 0	 2	 0	 0	 0	 0	 0	 0	 0	 0	 0
+1	 2	 0	 5	 0	 0	 0	 0	 0	 0	 0	 0	 0
+1	 3	 0	 7	 0	 0	 0	 0	 0	 0	 0	 0	 0
+1	 4	 0	 10	 0	 0	 0	 0	 0	 0	 0	 0	 0
+1	 5	 0	 12	 0	 0	 0	 0	 0	 0	 0	 0	 0
+1	 6	 0	 15	 0	 0	 0	 0	 0	 0	 0	 0	 0
+1	 7	 0	 17	 0	 0	 0	 0	 0	 0	 0	 0	 0
+1	 8	 0	 20	 0	 0	 0	 0	 0	 0	 0	 0	 0
+1	 9	 0	 22	 0	 0	 0	 0	 0	 0	 0	 0	 0
+1	 10	 0	 25	 0	 0	 0	 0	 0	 0	 0	 0	 0
+=====================
