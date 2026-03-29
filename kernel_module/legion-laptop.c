@@ -1088,7 +1088,11 @@ static const struct model_config model_q7cn = {
 };
 
 /*
- * Legion Pro 7 16AFR10H (2025) - Model 83RU - Ryzen 9 9955HX, RTX 5070 Ti, 3 fans
+ * Legion Pro 7 16AFR10H (2025)
+ * Model 83RU - Ryzen 9 9955HX, RTX 5070 Ti, 3 fans
+ * BIOS SMCN19WW released 11/25/2025
+ * Platform Firmware Revision: 1.19
+ * Embedded Controller Firmware Revision: 1.17 (legion_laptop reports 2b0 (version = 0x02, debug = 0xb0))
  * EC ID: ITE IT5508 (0x5508), reported by gluceri (upstream issue #385)
  * AMD variant of the Gen 10 Legion Pro 7 (same chassis as Q7CN/83F5).
  * Identical to model_q7cn except ramio_physical_start (unverified on AMD;
@@ -1105,20 +1109,24 @@ static const struct model_config model_smcn = {
 	.has_minifancurve = false,
 	.has_custom_powermode = true,
 	.custom_powermode_unsafe = true,
+	// ACCESS_METHOD_EC: "quiet", "balanced" and "performance" are available in /sys/firmware/acpi/platform_profile_choices
+	//                    they are correctly mapped to colors blue, white, red
+	// ACCESS_METHOD_WMI: "quiet", "balanced" and "performance" are available in /sys/firmware/acpi/platform_profile_choices
+	//                    they are correctly mapped to colors blue, white, red
 	.access_method_powermode = ACCESS_METHOD_WMI,
 	/* WMI controls 3-level white backlight; RGB per-zone via USB HID (048d:c197) */
 	.access_method_keyboard = ACCESS_METHOD_WMI,
-	.access_method_fanspeed = ACCESS_METHOD_WMI3,
-	.access_method_temperature = ACCESS_METHOD_WMI3,
+	.access_method_fanspeed = ACCESS_METHOD_WMI3, // ACCESS_METHOD_WMI3 ok; ACCESS_METHOD_ACPI seems to work; EC doesn't work
+	.access_method_temperature = ACCESS_METHOD_WMI3, // ACCESS_METHOD_WMI3 ok; ACCESS_METHOD_ACPI seems to work; EC doesn't work
 	.access_method_fancurve = ACCESS_METHOD_WMI3,
 	/* Gamezone WMI (FAN_GET/SET_FULLSPEED) can crash EC 0x5508; use OtherMethod */
-	.access_method_fanfullspeed = ACCESS_METHOD_WMI3,
+	.access_method_fanfullspeed = ACCESS_METHOD_WMI3, // ACCESS_METHOD_WMI and ACCESS_METHOD_EC seems to work too
 	.fan_fullspeed_unsupported = true,
 	.no_ylogo_light = true,
 	.no_ioport_light = true,
 	.fancurve_wmi_64byte = true,
 	.acpi_check_dev = false,
-	.ramio_physical_start = 0xFE00D400,
+	.ramio_physical_start = 0xFE00D400, // or 0xFE0B0400 ?? REALLY CONFUSED ABOUT THIS! I DON'T KNOW ITS CORRECT VALUE!
 	.ramio_size = 0x600
 };
 
