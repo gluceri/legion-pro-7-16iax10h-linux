@@ -12,7 +12,7 @@
 [![Build](https://github.com/ChaoticSi1ence/legion-pro-7-16iax10h-linux/actions/workflows/build.yml/badge.svg?branch=main)](https://github.com/ChaoticSi1ence/legion-pro-7-16iax10h-linux/actions/workflows/build.yml)
 
 > Fork of [johnfanv2/LenovoLegionLinux](https://github.com/johnfanv2/LenovoLegionLinux),
-> built for the **Legion Pro 7 16IAX10H** (Q7CN, EC 0x5508). Clone-and-build only.
+> built for the **Legion Pro 7 16IAX10H** (Q7CN, EC 0x5508) and **Legion Pro 7 16AFR10H** (SMCN, EC 0x5508).. Clone-and-build only.
 
 **Not affiliated with Lenovo. Use at your own risk.**
 
@@ -32,6 +32,8 @@
 
 ## Tested Hardware
 
+### 16IAX10H
+
 | Property | Value |
 |----------|-------|
 | Model | 83F5 |
@@ -41,7 +43,17 @@
 | GPU | NVIDIA RTX 5090 Laptop |
 | Test Results | **PASS 46/46** (live), **PASS 56/56** (dry-run) |
 
-All 3 fans, 3 temps (CPU/GPU/IC), power modes, rapid charge, touchpad, winkey, and fan lock verified working.
+### 16AFR10H
+
+| Property | Value |
+|----------|-------|
+| Model | 83RU |
+| BIOS | SMCN19WW |
+| EC | ITE IT5508 (0x5508) |
+| CPU | Ryzen 9 9955HX |
+| GPU | NVIDIA RTX 5070 Ti Laptop |
+| Test Results | hardware dry-run: **46/0/3/2/51** (PASS/FAIL/WARN/SKIP/TOTAL)<br> hardware with extreme mode: **41/0/1/1/43** (PASS/FAIL/WARN/SKIP/TOTAL)<br> live **21/0/3/24** (PASS/FAIL/WARN/TOTAL) |
+
 
 ---
 
@@ -127,10 +139,10 @@ echo 1 | sudo tee $LEGION/lockfancontroller   # Lock fans at current speed
 
 ```bash
 # Dry-run (safe — no hardware writes)
-sudo bash tests/test_hardware_q7cn.sh --wmi-dryrun
+sudo bash tests/test_hardware_q7cn_smcn.sh --wmi-dryrun
 
 # Full test with extreme mode
-sudo bash tests/test_hardware_q7cn.sh --test-extreme
+sudo bash tests/test_hardware_q7cn_smcn.sh --test-extreme
 ```
 
 ---

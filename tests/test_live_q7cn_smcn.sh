@@ -1,13 +1,15 @@
 #!/bin/bash
 # =============================================================================
-# Live Hardware Validation - Legion Pro 7 16IAX10H (Q7CN, EC 0x5508)
+# Live Hardware Validation - Legion Pro 7
+# 1) 16IAX10H (Q7CN, EC 0x5508)
+# 2) 16AFR10H (SMCN, EC 0x5508)
 # =============================================================================
 #
 # Tests the loaded driver against real hardware. Cycles through power modes,
 # reads all sensors, verifies custom mode block, checks LED init, and
 # confirms stability after each mode change.
 #
-# Usage: sudo bash tests/test_live_q7cn.sh
+# Usage: sudo bash tests/test_live_q7cn_smcn.sh
 #
 # Output: /tmp/legion-live-test-<timestamp>.log
 # =============================================================================
